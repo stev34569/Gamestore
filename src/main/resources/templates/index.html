@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<htmil xmlns:th="http://www.thymeleaf.org"
+       xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Tienda de video juegos</title>
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        
+        <header th:replace="layout/plantillaVideojuegos:: header"/>
+        <h3>Listado de clientes</h3>
+
+        <a th:href="@{/nuevoCliente}">Nuevo cliente</a>
+
+        <div th:if="${clientes !=null and !clientes.empty}">
+        </div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>APELLIDOS</th>
+                    <th>CORREO</th>
+                    <th>TELEFONOS</th>
+                    <th>CUIDAD</th>
+                    <th>DISTRITO</th>
+                    <th>PROVINCIA</th>
+                    <th>Eliminar</th>
+                    <th>Modificar</th>
+                </tr>
+            </thead>
+            <tbody>
+                 <tr th:each="item : ${clientes}">
+
+                    <td th:text="${item.nombre}"></td>
+                    <td th:text="${item.apellidos}"></td>
+                    <td th:text="${item.correo}"></td>
+                    <td th:text="${item.telefono}"></td>
+                    <td th:text="${item.cuidad}"></td>
+                    <td th:text="${item.distrito}"></td>
+                    <td th:text="${item.provincia}"></td>                 
+                    <td><a th:href="@{/eliminarCliente/} + ${item.idCliente}">ELIMINAR</a></td>
+                    <td><a th:href="@{/modificarCliente/} + ${item.idCliente}">MODIFICAR</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div th:if="${clientes ==null or clientes.empty}">
+            No tenemos Clientes que mostrar....
+        </div>
+        <footer th:replace="layout/plantillaVideojuegos:: footer"/>
+    </body>
+</html>
